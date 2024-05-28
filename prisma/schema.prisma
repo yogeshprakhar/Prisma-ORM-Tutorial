@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Defining your data model
+// command to add these models in db 'npx prisma migrate dev --name UserAndTodoAdded'
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  firstname  String?
+  lastname String?
+  password  String
+}
+
+model Todo {
+  id Int @id @default(autoincrement())
+  titel String
+  done Boolean @default(false)
+  description String?
+  userId Int
+}
+
+// after all this do 'npx prisma generate'
